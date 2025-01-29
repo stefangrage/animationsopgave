@@ -7,9 +7,9 @@ import musik1 from "../assets/images/musik1.jpg";
 import musik2 from "../assets/images/musik2.jpg";
 import musik3 from "../assets/images/musik3.jpg";
 import musik4 from "../assets/images/musik4.jpg";
-const images = await Astro.glob("/src/assets/images/galleri/*").then(files => {
-  return files.map(file => file.default);
-});
+const images = Object.values(
+  import.meta.glob("/src/assets/images/galleri/*", { eager: true })
+).map(file => file.default);
 ---
 <MainLayout title="Titel">
 		<section class="grid md:grid-cols-2 border-8 border-black lg:mt-32">		
@@ -40,7 +40,7 @@ const images = await Astro.glob("/src/assets/images/galleri/*").then(files => {
 			</article>
 		</section>
 		
-		<section class="mt-32 grid lg:grid-cols-3 mx-auto gap-4 items-center">
+		<section class="mt-32 grid lg:grid-cols-3 mx-auto gap-4 items-center ">
 			<div><Image src={musik2} format="webp" alt="foto" class="my-class" /></div>
 			<div><Image src={musik3} format="webp" alt="foto" class="my-class" /></div>
 			<div><Image src={musik4} format="webp" alt="foto" class="my-class" /></div>
